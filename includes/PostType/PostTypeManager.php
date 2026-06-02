@@ -163,10 +163,10 @@ class PostTypeManager {
 	 * @since 1.0.0
 	 */
 	public function do_enable_graphql(): void {
-		$post_types = apply_filters( 'pkgraphqlkit/graphql/post_types', $this->graphql_post_types() );
+		$post_types = apply_filters( 'pkgraphqlkit/graphql/enable/post_types', $this->graphql_post_types() );
 		PostTypeHelper::enable_graphql( $post_types );
 
-		$taxonomies = apply_filters( 'pkgraphqlkit/graphql/taxonomies', $this->graphql_taxonomies() );
+		$taxonomies = apply_filters( 'pkgraphqlkit/graphql/enable/taxonomies', $this->graphql_taxonomies() );
 		TaxonomyHelper::enable_graphql( $taxonomies );
 	}
 }

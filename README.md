@@ -109,8 +109,8 @@ Same methods available on `TaxonomyHelper`.
 | `pkgraphqlkit/register/taxonomies` | Modify taxonomies array before registration |
 | `pkgraphqlkit/unregister/post_types` | Modify slugs array before unregistering |
 | `pkgraphqlkit/unregister/taxonomies` | Modify slugs array before unregistering |
-| `pkgraphqlkit/graphql/post_types` | Modify slugs array before enabling GraphQL |
-| `pkgraphqlkit/graphql/taxonomies` | Modify slugs array before enabling GraphQL |
+| `pkgraphqlkit/graphql/enable/post_types` | Modify slugs array before enabling GraphQL |
+| `pkgraphqlkit/graphql/enable/taxonomies` | Modify slugs array before enabling GraphQL |
 
 ---
 
