@@ -1,0 +1,12 @@
+{
+  "name": "petrokrupenia/pk-graphql-kit",
+  "version": "1.0.0",
+  "description": "Developer toolkit for headless WordPress — CPT, ACF, WPGraphQL schema in one place",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "PkGraphQLKit\\": "includes/"
+    }
+  }
+}
