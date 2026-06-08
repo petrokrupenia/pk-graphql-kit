@@ -12,6 +12,17 @@ class IntegrationManager {
 	private array $active = [];
 
 	/**
+	 * Master toggle for all integrations.
+	 * Return false to skip all integration discovery and registration.
+	 *
+	 * @return bool
+	 * @since 1.0.0
+	 */
+	protected function integrations_enabled(): bool {
+		return true;
+	}
+
+	/**
 	 * Discovers all integration classes from the Integrations/ directory,
 	 * then calls register() on each one whose target plugin is active.
 	 * Called once from PkGraphQLKit::boot() on plugins_loaded.
@@ -20,6 +31,10 @@ class IntegrationManager {
 	 * @since 1.0.0
 	 */
 	public function boot(): void {
+		if ( ! $this->integrations_enabled() ) {
+			return;
+		}
+
 		foreach ( $this->discover() as $integration ) {
 			if ( $integration->is_active() ) {
 				$integration->register();
