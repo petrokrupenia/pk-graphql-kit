@@ -15,6 +15,7 @@ class IntegrationManager {
 	 * Master toggle for all integrations.
 	 * Return false to skip all integration discovery and registration.
 	 *
+	 * @skill /toggle-integrations on|off
 	 * @return bool
 	 * @since 1.0.0
 	 */

@@ -158,7 +158,7 @@ The class is discovered and booted automatically — no registration required.
 
 ### Code-based field groups
 
-Implement `AcfFieldGroupInterface` and register via `AcfManager::register_field_group()` if you need field groups defined in PHP. In most cases, the ACF admin + JSON sync is preferable.
+Create a class in `includes/Acf/FieldGroups/` that implements `AcfFieldGroupInterface` — it is discovered and registered automatically. Use `/make-acf-field-group` to generate the skeleton, or register manually via `AcfManager::register_field_group()`.
 
 ### Filters
 
@@ -319,9 +319,48 @@ pkgraphqlkit()->admin()            // AdminPage
 
 ---
 
+## Claude Code Skills
+
+Skills are slash commands for Claude Code that generate or modify plugin code directly. They live in `.claude/commands/` inside the plugin and are available automatically when Claude Code is opened from the plugin directory.
+
+### Available skills
+
+| Skill | Arguments | Example |
+|-------|-----------|---------|
+| `/register-cpt` | `slug singular plural` | `/register-cpt book Book Books` |
+| `/register-taxonomy` | `slug singular plural [post_type1,post_type2]` | `/register-taxonomy genre Genre Genres book` |
+| `/unregister` | `cpt\|taxonomy slug` | `/unregister cpt attachment` |
+| `/add-cors` | `url [url2 ...]` | `/add-cors https://mysite.com http://localhost:3000` |
+| `/toggle-integrations` | `on\|off` | `/toggle-integrations off` |
+| `/add-graphql-field` | `TypeName fieldName ReturnType [description]` | `/add-graphql-field Post readingTime Int "Reading time"` |
+| `/add-mutation` | `MutationName [description]` | `/add-mutation SubmitContactForm` |
+| `/add-acf-options-page` | `Title [parent:parent-slug]` | `/add-acf-options-page "Site Settings"` |
+| `/make-acf-field-group` | `ClassName "Title" [location]` | `/make-acf-field-group BookFields "Book Fields" post-type:book` |
+| `/make-acf-dynamic-fields` | `ClassName [field1,field2]` | `/make-acf-dynamic-fields ProductChoices product_type` |
+
+`/make-acf-field-group` location options: `post-type:slug`, `options`, `page`, `user`.
+
+### Working from a higher-level directory
+
+Skills are only loaded by Claude Code from the working directory it is opened in. If you open Claude Code from a parent directory (e.g. the WordPress root at `app/public`), create symlinks so the skills are available there too:
+
+```bash
+# Run once from the WordPress root (app/public)
+mkdir -p .claude/commands
+for f in wp-content/plugins/pk-graphql-kit/.claude/commands/*.md; do
+    ln -sf "../../$f" ".claude/commands/$(basename $f)"
+done
+```
+
+The symlinks at `app/public/.claude/commands/` are already committed to this repository. If you add new skills to the plugin, re-run the command above to pick them up.
+
+---
+
 ## Directory structure
 
 ```
+.claude/
+└── commands/                        — Claude Code skills (slash commands)
 includes/
 ├── Admin/
 │   └── AdminPage.php               — admin overview page (Settings → PK GraphQL Kit)
@@ -329,7 +368,8 @@ includes/
 │   ├── AcfDynamicFields.php        — base class for dynamic field population
 │   ├── AcfFieldGroupInterface.php  — interface for code-based field groups
 │   ├── AcfManager.php              — options pages, field groups, ACF JSON path
-│   └── DynamicFields/              — auto-discovered dynamic field classes
+│   ├── DynamicFields/              — auto-discovered dynamic field classes
+│   └── FieldGroups/                — auto-discovered code-based field group classes
 ├── GraphQL/
 │   ├── GraphQLManager.php          — custom types, fields, mutations
 │   └── GraphQLSettings.php         — WPGraphQL settings overrides + CORS

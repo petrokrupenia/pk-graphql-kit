@@ -16,6 +16,7 @@ class AcfManager {
 	 * Each item is a string title or a full args array.
 	 * Passes through the pkgraphqlkit/acf/options_pages filter before processing.
 	 *
+	 * @skill /add-acf-options-page Title [parent:parent-slug]
 	 * @return array<int, string|array>
 	 * @since 1.0.0
 	 */
@@ -88,9 +89,11 @@ class AcfManager {
 	}
 
 	/**
-	 * Registers all code-based field groups added via register_field_group().
+	 * Registers all code-based field groups added via register_field_group()
+	 * and auto-discovered from includes/Acf/FieldGroups/.
 	 * Runs on acf/init.
 	 *
+	 * @skill /make-acf-field-group ClassName "Title" [location]
 	 * @return void
 	 * @since 1.0.0
 	 */
@@ -128,6 +131,7 @@ class AcfManager {
 	 * Also auto-discovers subclasses from includes/Acf/DynamicFields/ directory.
 	 * Runs on acf/init.
 	 *
+	 * @skill /make-acf-dynamic-fields ClassName [field_name1,field_name2]
 	 * @return void
 	 * @since 1.0.0
 	 */

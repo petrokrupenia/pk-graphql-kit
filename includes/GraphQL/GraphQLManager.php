@@ -15,6 +15,7 @@ class GraphQLManager {
 	 * Each item requires: type_name, field_name, config.
 	 * Config follows the register_graphql_field() signature.
 	 *
+	 * @skill /add-graphql-field TypeName fieldName ReturnType [description]
 	 * @return array<int, array{type_name: string, field_name: string, config: array}>
 	 * @since 1.0.0
 	 */
@@ -61,6 +62,7 @@ class GraphQLManager {
 	 * Config follows the register_graphql_mutation() signature:
 	 * inputFields, outputFields, mutateAndGetPayload.
 	 *
+	 * @skill /add-mutation MutationName [description]
 	 * @return array<int, array{name: string, config: array}>
 	 * @since 1.0.0
 	 */
