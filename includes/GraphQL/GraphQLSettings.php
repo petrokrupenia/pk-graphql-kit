@@ -41,6 +41,7 @@ class GraphQLSettings {
 	 * The current site URL is included by default.
 	 * Add your Next.js or other frontend URLs here.
 	 *
+	 * @skill /add-cors https://mysite.com http://localhost:3000
 	 * @return string[]
 	 * @since 1.0.0
 	 */

@@ -13,6 +13,7 @@ class PostTypeManager {
 	 * Each item is a raw data array with keys: slug, singular, plural, args (optional).
 	 * Passes through the pkgraphqlkit/register/post_types filter before processing.
 	 *
+	 * @skill /register-cpt slug singular plural
 	 * @return array<int, array{slug: string, singular: string, plural: string, args?: array}>
 	 * @since 1.0.0
 	 */
@@ -27,6 +28,7 @@ class PostTypeManager {
 	 * Each item is a raw data array with keys: slug, singular, plural, post_types (optional), args (optional).
 	 * Passes through the pkgraphqlkit/register/taxonomies filter before processing.
 	 *
+	 * @skill /register-taxonomy slug singular plural [post_type1,post_type2]
 	 * @return array<int, array{slug: string, singular: string, plural: string, post_types?: string[], args?: array}>
 	 * @since 1.0.0
 	 */
@@ -40,6 +42,7 @@ class PostTypeManager {
 	 * Defines post type slugs to unregister.
 	 * Passes through the pkgraphqlkit/unregister/post_types filter before processing.
 	 *
+	 * @skill /unregister cpt slug
 	 * @return string[]
 	 * @since 1.0.0
 	 */
@@ -51,6 +54,7 @@ class PostTypeManager {
 	 * Defines taxonomy slugs to unregister.
 	 * Passes through the pkgraphqlkit/unregister/taxonomies filter before processing.
 	 *
+	 * @skill /unregister taxonomy slug
 	 * @return string[]
 	 * @since 1.0.0
 	 */
