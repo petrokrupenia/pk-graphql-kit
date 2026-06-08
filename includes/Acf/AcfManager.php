@@ -99,6 +99,17 @@ class AcfManager {
 			return;
 		}
 
+		$dir   = PK_GRAPHQL_KIT_PATH . 'includes/Acf/FieldGroups/';
+		$files = glob( $dir . '*.php' ) ?: [];
+
+		foreach ( $files as $file ) {
+			$class = 'PkGraphQLKit\\Acf\\FieldGroups\\' . basename( $file, '.php' );
+
+			if ( class_exists( $class ) && is_subclass_of( $class, AcfFieldGroupInterface::class ) ) {
+				$this->field_groups[] = new $class();
+			}
+		}
+
 		foreach ( $this->field_groups as $group ) {
 			acf_add_local_field_group( array_merge(
 				[
